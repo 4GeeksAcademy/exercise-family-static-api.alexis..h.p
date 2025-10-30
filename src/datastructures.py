@@ -25,19 +25,38 @@ class FamilyStructure:
         self._next_id += 1
         return generated_id
 
-    def add_member(self, member):
-        ## You have to implement this method
-        ## Append the member to the list of _members
+    def add_member(self, Date_member):
+        new_member = {
+            "id": self._generate_id(),
+            "first_name": Date_member["first_name"],
+            "last_name": Date_member["last_name"],
+            "age": Date_member["age"],
+            "lucky_numbers": Date_member["lucky_numbers"]
+        }
+        self._members.append(new_member)
         pass
+   
+    def get_member_for_id(self,id): 
+        for member in self._members: 
+            if member["id"] == id:
+                return member
+        return None
 
     def delete_member(self, id):
-        ## You have to implement this method
-        ## Loop the list and delete the member with the given id
-        pass
+     member = self.get_member_for_id(id)
+     if member is None:
+        return {"message": "miembro no encontrado"}, 404
+     self._members.remove(member)
+     return "miembro eliminado"
+  
+        
+            
 
     def get_member(self, id):
-        ## You have to implement this method
-        ## Loop all the members and return the one with the given id
+        for member in self._members: 
+            if member["id"] == id:
+                return member
+            return "miembro no encontrado",400
         pass
 
     # This method is done, it returns a list with all the family members
